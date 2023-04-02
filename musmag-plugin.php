@@ -33,8 +33,7 @@ final class MusMagPlugin
   public function __construct()
   {
     $this->require_files();
-
-    add_action('plugins_loaded', [$this,'init']);
+    $this->init();
   }
 
   private function require_files()
