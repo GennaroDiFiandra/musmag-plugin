@@ -23,10 +23,10 @@ use MusMagPlugin\FieldsGenerator;
 use MusMagPlugin\Metabox;
 use MusMagPlugin\HooksActivator;
 
-class MusMagPlugin
+final class MusMagPlugin
 {
-  private Post $event;
   private HooksActivator $activator;
+  private Post $event;
   private array $event_details_fields;
   private Metabox $event_details_metabox;
 
