@@ -1,0 +1,5 @@
+# ignore os files
+.DS_Store
+
+# ignore composer vendor
+vendor/
