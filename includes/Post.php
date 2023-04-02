@@ -12,10 +12,11 @@ class Post
   private bool $has_gutenberg;
   private int $menu_position;
   private string $menu_icon;
+  private array $features;
   private array $labels;
   private array $args;
 
-  public function __construct($name, $plural_name, $is_public, $has_gutenberg, $menu_position, $menu_icon)
+  public function __construct($name, $plural_name, $is_public, $has_gutenberg, $menu_position, $menu_icon, $features=['title'])
   {
     $this->name = $name;
     $this->plural_name = $plural_name;
@@ -23,6 +24,7 @@ class Post
     $this->has_gutenberg = $has_gutenberg;
     $this->menu_position = $menu_position;
     $this->menu_icon = $menu_icon;
+    $this->features = $features;
     $this->labels = [
       'name' => _x(ucwords($this->plural_name), 'Post type plural name', 'musmag-plugin'),
       'name' => _x(ucwords($this->name), 'Post type singular name', 'musmag-plugin'),
@@ -33,6 +35,7 @@ class Post
       'show_in_rest' => $this->has_gutenberg,
       'menu_position' => $this->menu_position,
       'menu_icon' => $this->menu_icon,
+      'supports' => $this->features,
     ];
   }
 

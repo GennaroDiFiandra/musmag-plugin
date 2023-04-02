@@ -46,7 +46,7 @@ final class MusMagPlugin
   public function init()
   {
     // add Event post
-    $this->event = new Post('event', 'events', true, true, 5, 'dashicons-calendar-alt');
+    $this->event = new Post('event', 'events', true, true, 5, 'dashicons-calendar-alt', ['title','editor','author','thumbnail']);
 
     // // add Event fields
     $this->event_details_fields[] = new DateField('event date', 'event_date');
