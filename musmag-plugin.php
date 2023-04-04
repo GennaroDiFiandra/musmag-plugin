@@ -18,9 +18,12 @@
 use MusMagPlugin\Post;
 use MusMagPlugin\Field;
 use MusMagPlugin\DateField;
+use MusMagPlugin\FileField;
+use MusMagPlugin\WysiwygField;
 use MusMagPlugin\MoneyField;
 use MusMagPlugin\FieldsGenerator;
-use MusMagPlugin\Metabox;
+use MusMagPlugin\PostMetabox;
+use MusMagPlugin\OptionsPageMetabox;
 use MusMagPlugin\HooksActivator;
 
 final class MusMagPlugin
@@ -28,7 +31,11 @@ final class MusMagPlugin
   private HooksActivator $activator;
   private Post $event;
   private array $event_details_fields;
-  private Metabox $event_details_metabox;
+  private PostMetabox $event_details_metabox;
+  private array $banners_details_fields;
+  private OptionsPageMetabox $banners_details_metabox;
+  private array $author_box_fields;
+  private OptionsPageMetabox $author_box_metabox;
 
   public function __construct()
   {
@@ -54,12 +61,45 @@ final class MusMagPlugin
     $this->event_details_fields[] = new MoneyField('event price', 'event_price');
 
     // add Event metabox
-    $this->event_details_metabox = new Metabox('event details', 'event_details', [$this->event->get_name()], $this->event_details_fields);
+    $this->event_details_metabox = new PostMetabox('event details', 'event_details', [$this->event->get_name()], $this->event_details_fields);
+
+    // add Banners fields
+    $this->banners_details_fields[] = new FileField('top banner', 'top_banner');
+    $this->banners_details_fields[] = new FileField('bottom banner', 'bottom_banner');
+
+    // add Banners options page metabox
+    $this->banners_details_metabox = new OptionsPageMetabox('banners details', 'banners_details', $this->banners_details_fields, 'banners', 'options-general.php');
+
+    // add AuthorBox fields
+    $this->author_box_fields[] = new WysiwygField('author box', 'author_box');
+
+    // add AuthorBox options page metabox
+    $this->author_box_metabox = new OptionsPageMetabox('author box details', 'author_box_details', $this->author_box_fields, 'author box', 'options-general.php');
 
     // activate hooks
     $this->activator = new HooksActivator();
     $this->activator->activate_actions($this->event);
     $this->activator->activate_actions($this->event_details_metabox);
+    $this->activator->activate_actions($this->banners_details_metabox);
+    $this->activator->activate_actions($this->author_box_metabox);
+
+
+    // todo: create a php class for the follow code
+    // hook into theme action musmag_theme/single_event/after_title and print a banner
+    add_action('musmag_theme/single_event/after_title', function() {
+      $banner_url = $this->banners_details_metabox->get_field_value('top_banner');
+      echo '<img src="'.$banner_url.'">';
+    });
+    // hook into theme action musmag_theme/single_event/after_title and print a banner
+    add_action('musmag_theme/single_event/after_content', function() {
+      $banner_url = $this->banners_details_metabox->get_field_value('bottom_banner');
+      echo '<img src="'.$banner_url.'">';
+    });
+    // hook into theme filter musmag_theme/single_event/author and alter the author signature
+    add_filter('musmag_theme/single_event/author', function($author, $id) {
+      $author_bio = $this->author_box_metabox->get_field_value('author_box');
+      return '<p>'.$author.'</p>'.'<div>'.$author_bio.'</div>';
+    }, 10, 3);
   }
 }
 new MusMagPlugin();
