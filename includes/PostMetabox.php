@@ -4,19 +4,8 @@ namespace MusMagPlugin;
 
 defined('WPINC') || die;
 
-class Metabox
+class PostMetabox extends MetaboxAbstract
 {
-  private string $name;
-  private string $unique_identifier;
-  private array $attach_to;
-  private bool $has_labels;
-  private bool $is_closed;
-  private string $position;
-  private string $importance;
-  private bool $load_default_styles;
-  private array $fields;
-  private array $args;
-
   public function __construct($name, $unique_identifier, $attach_to, $fields, $has_labels=true, $is_closed=false, $position='advanced', $importance='high', $load_default_styles=true)
   {
     $this->name = __($name, 'musmag-plugin');
@@ -38,28 +27,6 @@ class Metabox
       'closed' => $this->is_closed,
       'cmb_styles' => $this->load_default_styles,
       'fields' => $this->fields,
-    ];
-  }
-
-  private function get_fields_arr($fields)
-  {
-    foreach ($fields as $field)
-    {
-      $fields_arr[] = $field->get_field();
-    }
-
-    return $fields_arr;
-  }
-
-  public function register_metabox()
-  {
-    new_cmb2_box($this->args);
-  }
-
-  public function setup_actions()
-  {
-    return [
-      'cmb2_admin_init' => ['register_metabox',10,1],
     ];
   }
 }
