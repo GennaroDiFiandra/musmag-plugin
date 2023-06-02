@@ -1,12 +1,15 @@
 <?php
 
-namespace MusMagPlugin;
+namespace MusMagPlugin\Field;
 
 defined('WPINC') || die;
 
-class FileField extends Field
+class Field
 {
-  const TYPE = 'file';
+  const TYPE = 'text';
+  protected string $name;
+  protected string $unique_identifier;
+  protected array $args;
 
   public function __construct($name, $unique_identifier)
   {
