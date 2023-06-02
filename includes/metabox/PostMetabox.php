@@ -1,6 +1,6 @@
 <?php
 
-namespace MusMagPlugin;
+namespace MusMagPlugin\Metabox;
 
 defined('WPINC') || die;
 

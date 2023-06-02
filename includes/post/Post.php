@@ -1,6 +1,6 @@
 <?php
 
-namespace MusMagPlugin;
+namespace MusMagPlugin\Post;
 
 defined('WPINC') || die;
 
@@ -16,7 +16,12 @@ class Post
   private array $labels;
   private array $args;
 
-  public function __construct($name, $plural_name, $is_public, $has_gutenberg, $menu_position, $menu_icon, $features=['title'])
+  public function get_name()
+  {
+    return $this->name;
+  }
+
+  public function set($name, $plural_name, $is_public, $has_gutenberg, $menu_position, $menu_icon, $features=['title'])
   {
     $this->name = $name;
     $this->plural_name = $plural_name;
@@ -39,7 +44,7 @@ class Post
     ];
   }
 
-  public function register_post()
+  public function register()
   {
     register_post_type($this->name, $this->args);
   }
@@ -47,12 +52,7 @@ class Post
   public function setup_actions()
   {
     return [
-      'init' => ['register_post',10,2],
+      'init' => ['register',10,0],
     ];
-  }
-
-  public function get_name()
-  {
-    return $this->name;
   }
 }

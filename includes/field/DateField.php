@@ -1,15 +1,12 @@
 <?php
 
-namespace MusMagPlugin;
+namespace MusMagPlugin\Field;
 
 defined('WPINC') || die;
 
-class Field
+class DateField extends Field
 {
-  const TYPE = 'text';
-  protected string $name;
-  protected string $unique_identifier;
-  protected array $args;
+  const TYPE = 'text_date';
 
   public function __construct($name, $unique_identifier)
   {
@@ -20,10 +17,5 @@ class Field
       'id' => $this->unique_identifier,
       'type' => self::TYPE,
     ];
-  }
-
-  public function get_field()
-  {
-    return $this->args;
   }
 }
