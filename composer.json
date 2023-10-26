@@ -10,5 +10,8 @@
     "psr-4": {
       "MusMagPlugin\\":"includes/"
     }
+  },
+  "require": {
+    "htmlburger/carbon-fields": "^3.6"
   }
 }
