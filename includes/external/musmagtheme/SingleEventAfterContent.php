@@ -19,7 +19,7 @@ class SingleEventAfterContent
     echo '<img src="'.$this->bottom_banner_url.'">';
   }
 
-  public function setup_actions()
+  public function setup_hooks()
   {
     return [
       'musmag_theme/single_event/after_content' => ['print_bottom_banner',10,0],

@@ -20,7 +20,7 @@ final class SingleEventAuthor
     return '<p>'.$author.'</p>'.'<div>'.$this->author_bio_text.'</div>';
   }
 
-  public function setup_filters()
+  public function setup_hooks()
   {
     return [
       'musmag_theme/single_event/author' => ['alter_author_bio',10,2],

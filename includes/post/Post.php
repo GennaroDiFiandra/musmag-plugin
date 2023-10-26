@@ -49,7 +49,7 @@ class Post
     register_post_type($this->name, $this->args);
   }
 
-  public function setup_actions()
+  public function setup_hooks()
   {
     return [
       'init' => ['register',10,0],

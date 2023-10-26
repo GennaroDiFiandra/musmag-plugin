@@ -34,7 +34,7 @@ abstract class MetaboxAbstract
     new_cmb2_box($this->args);
   }
 
-  public function setup_actions()
+  public function setup_hooks()
   {
     return [
       'cmb2_admin_init' => ['register_metabox',10,1],

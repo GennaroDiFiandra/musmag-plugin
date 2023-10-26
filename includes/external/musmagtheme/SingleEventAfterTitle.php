@@ -19,7 +19,7 @@ class SingleEventAfterTitle
     echo '<img src="'.$this->top_banner_url.'">';
   }
 
-  public function setup_actions()
+  public function setup_hooks()
   {
     return [
       'musmag_theme/single_event/after_title' => ['print_top_banner',10,0],
