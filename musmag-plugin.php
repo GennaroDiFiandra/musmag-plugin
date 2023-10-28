@@ -19,9 +19,9 @@ use MusMagPlugin\HooksActivator;
 
 use MusMagPlugin\CarbonFields\CarbonFieldsLoader;
 use MusMagPlugin\CarbonFields\PluginOptionsPage;
-use MusMagPlugin\CarbonFields\EventPostDetailsMetabox;
 
 use MusMagPlugin\Post\Post;
+use MusMagPlugin\CarbonFields\EventPostDetailsMetabox;
 
 use MusMagPlugin\External\MusMagTheme\SingleEventAfterTitle;
 use MusMagPlugin\External\MusMagTheme\SingleEventAfterContent;
@@ -34,9 +34,20 @@ final class MusMagPlugin
   private HooksActivator $activator;
   private array $hooks_book = [];
 
-  const PLUGINOPTIONSPAGE = 'carbon_fields_container_musmag_plugin';
+  private CarbonFieldsLoader $carbon_fields_loader;
+
+  private PluginOptionsPage $plugin_options_page;
+
+  private const PLUGINOPTIONSPAGEID = 'carbon_fields_container_musmag_plugin';
 
   private Post $event;
+  private EventPostDetailsMetabox $event_post_details_metabox;
+
+  private SingleEventAfterTitle $single_event_after_title;
+
+  private SingleEventAfterContent $single_event_after_content;
+
+  private SingleEventAuthor $single_event_author;
 
   public static function instance():MusMagPlugin
   {
@@ -69,7 +80,8 @@ final class MusMagPlugin
     require_once __DIR__.'/vendor/autoload.php';
 
     // load carbon fields manager
-    $this->add_to_hooks_book(new CarbonFieldsLoader());
+    $this->carbon_fields_loader = new CarbonFieldsLoader();
+    $this->add_to_hooks_book($this->carbon_fields_loader);
   }
 
   public function hooks_book()
@@ -87,24 +99,28 @@ final class MusMagPlugin
     $this->require_resources();
 
     // add plugin options page
-    $this->add_to_hooks_book(new PluginOptionsPage());
+    $this->plugin_options_page = new PluginOptionsPage();
+    $this->add_to_hooks_book($this->plugin_options_page);
 
     // add Event post
     $this->event = new Post();
     $this->event->set('event', 'events', true, true, 5, 'dashicons-calendar-alt', ['title','editor','author','thumbnail']);
     $this->add_to_hooks_book($this->event);
-
     // add Event metabox and fields
-    $this->add_to_hooks_book(new EventPostDetailsMetabox());
+    $this->event_post_details_metabox = new EventPostDetailsMetabox();
+    $this->add_to_hooks_book($this->event_post_details_metabox);
 
     // run callbacks attached to musmag_theme/single_event/after_title action hook
-    $this->add_to_hooks_book(new SingleEventAfterTitle(self::PLUGINOPTIONSPAGE, 'after_title_banner'));
+    $this->single_event_after_title = new SingleEventAfterTitle(self::PLUGINOPTIONSPAGEID, 'after_title_banner');
+    $this->add_to_hooks_book($this->single_event_after_title);
 
     // run callbacks attached to musmag_theme/single_event/after_content action hook
-    $this->add_to_hooks_book(new SingleEventAfterContent(self::PLUGINOPTIONSPAGE, 'after_content_banner'));
+    $this->single_event_after_content = new SingleEventAfterContent(self::PLUGINOPTIONSPAGEID, 'after_content_banner');
+    $this->add_to_hooks_book($this->single_event_after_content);
 
     // run callbacks attached to musmag_theme/single_event/author filter hook
-    $this->add_to_hooks_book(new SingleEventAuthor(self::PLUGINOPTIONSPAGE, 'author_bio'));
+    $this->single_event_author = new SingleEventAuthor(self::PLUGINOPTIONSPAGEID, 'author_bio');
+    $this->add_to_hooks_book($this->single_event_author);
 
     // activate hooks
     $this->activator = new HooksActivator();
