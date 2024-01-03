@@ -1,0 +1,83 @@
+# Copyright (C) 2023 Gennaro Di Fiandra
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: MusMag Plugin 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/musmag-plugin\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-11-09T13:08:14+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.9.0\n"
+"X-Domain: musmag-plugin\n"
+
+#. Plugin Name of the plugin
+#: includes/carbonfields/PluginOptionsPage.php:14
+msgid "MusMag Plugin"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "#"
+msgstr ""
+
+#. Description of the plugin
+msgid "Add the Event post type and related fields. Plus, manipulate some hooks in the Event template exposed by MusMag Theme."
+msgstr ""
+
+#. Author of the plugin
+msgid "Gennaro Di Fiandra"
+msgstr ""
+
+#: includes/carbonfields/EventPostDetailsMetabox.php:14
+msgid "Event Details"
+msgstr ""
+
+#: includes/carbonfields/EventPostDetailsMetabox.php:19
+msgid "When start"
+msgstr ""
+
+#: includes/carbonfields/EventPostDetailsMetabox.php:22
+msgid "Duration (in days)"
+msgstr ""
+
+#: includes/carbonfields/EventPostDetailsMetabox.php:24
+msgid "Not use a separator for thousands."
+msgstr ""
+
+#: includes/carbonfields/EventPostDetailsMetabox.php:26
+msgid "City"
+msgstr ""
+
+#: includes/carbonfields/EventPostDetailsMetabox.php:28
+msgid "Price"
+msgstr ""
+
+#: includes/carbonfields/EventPostDetailsMetabox.php:30
+msgid "Use comma as decimals separator. Not use a separator for thousands."
+msgstr ""
+
+#: includes/carbonfields/PluginOptionsPage.php:16
+msgid "After title banner"
+msgstr ""
+
+#: includes/carbonfields/PluginOptionsPage.php:19
+msgid "After content banner"
+msgstr ""
+
+#: includes/carbonfields/PluginOptionsPage.php:22
+msgid "Author bio"
+msgstr ""
+
+#: includes/post/LabelsTranslator.php:11
+#: includes/post/LabelsTranslator.php:13
+msgid "Events"
+msgstr ""
+
+#: includes/post/LabelsTranslator.php:12
+#: includes/post/LabelsTranslator.php:14
+msgid "Event"
+msgstr ""
