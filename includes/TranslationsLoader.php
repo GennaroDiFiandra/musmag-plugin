@@ -14,7 +14,7 @@ class TranslationsLoader
   public function setup_hooks()
   {
     return [
-      'after_setup_theme' => ['load_translations',10,0],
+      ['after_setup_theme', 'load_translations', 10, 0],
     ];
   }
 }

@@ -8,15 +8,16 @@ class HooksActivator
 {
   public function activate_hooks($object)
   {
-    $hooks = $object->setup_hooks();
+    $hooks_book = $object->setup_hooks();
 
-    foreach ($hooks as $hook_name => $hook_values)
+    foreach ($hooks_book as $hooks_book_item)
     {
-      $callback = $hook_values[0];
-      $priority = $hook_values[1];
-      $accepted_args = $hook_values[2];
+      $hook = $hooks_book_item[0];
+      $callback = $hooks_book_item[1];
+      $priority = $hooks_book_item[2];
+      $accepted_args = $hooks_book_item[3];
 
-      add_filter($hook_name, [$object,$callback], $priority, $accepted_args);
+      add_filter($hook, [$object,$callback], $priority, $accepted_args);
     }
   }
 }

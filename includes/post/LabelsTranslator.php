@@ -19,7 +19,7 @@ class LabelsTranslator
   public function setup_hooks()
   {
     return [
-      'post_type_labels_event' => ['translate_event_labels',10,1],
+      ['post_type_labels_event', 'translate_event_labels',10,1],
     ];
   }
 }
