@@ -27,7 +27,7 @@ class PluginOptionsPage
   public function setup_hooks()
   {
     return [
-      'carbon_fields_register_fields' => ['register',10,0],
+      ['carbon_fields_register_fields', 'register',10,0],
     ];
   }
 }

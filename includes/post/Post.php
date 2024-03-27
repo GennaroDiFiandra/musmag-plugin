@@ -47,7 +47,7 @@ class Post
   public function setup_hooks()
   {
     return [
-      'init' => ['register',10,0],
+       ['init', 'register',10,0],
     ];
   }
 }

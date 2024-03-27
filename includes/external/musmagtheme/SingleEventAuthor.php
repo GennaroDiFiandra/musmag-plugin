@@ -31,8 +31,8 @@ class SingleEventAuthor
   public function setup_hooks()
   {
     return [
-      'carbon_fields_register_fields' => ['set_author_bio',11,0],
-      'musmag_theme/single_event/author' => ['alter_author_bio',10,2],
+      ['carbon_fields_register_fields', 'set_author_bio',11,0],
+      ['musmag_theme/single_event/author', 'alter_author_bio',10,2],
     ];
   }
 }

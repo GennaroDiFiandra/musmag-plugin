@@ -14,7 +14,7 @@ class Loader
   public function setup_hooks()
   {
     return [
-      'after_setup_theme' => ['register',10,0],
+      ['after_setup_theme', 'register',10,0],
     ];
   }
 }
